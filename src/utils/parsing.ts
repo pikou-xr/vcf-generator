@@ -28,6 +28,7 @@ export const parseCsv = async (file: File): Promise<ParseResult> => {
                 let data: RawData = results.data
                 let errors: ParseResult["errors"] = []
                 if (results.errors.length) {
+                    // Remove errored rows
                     const erroredRows = results.errors.map((error) => error.row)
                     data = data.filter((d, i) => !erroredRows.includes(i))
                     errors = results.errors.map((error) =>

@@ -1,40 +1,42 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import React, { PropsWithChildren, useState } from 'react'
 import styled from 'styled-components/macro'
-import { selectRawDataSafe, selectRawDataErrors, selectRawDataHeaders } from '../../store/selectors'
 import theme from '../../theme'
-import RawDataErrors from './RawDataErrors'
-import RawDataHeaders from './RawDataHeaders'
-import RawDatumView from './RawDatumView'
+import { DataHeaders } from '../../types'
+import DataTableErrors from './DataTableErrors'
+import DataTableHeaders from './DataTableHeaders'
+import DataTableRow from './DataTableRow'
 
 const PREVIEW_SIZE = 10
 
-export interface Props {
+export interface Props<D> {
     className?: string
+    data: Array<D>
+    headers: DataHeaders
+    errors: Array<Error>
 }
 
-const RawDataView: React.FunctionComponent<Props> = ({ className = '' }) => {
+const DataTable = <D, >({data, headers, errors, className = ''}: PropsWithChildren<Props<D>>) => {
     const [isDataCollapsed, setIsDataCollapsed] = useState(true)
-    const allData = useSelector(selectRawDataSafe)
-    const headers = useSelector(selectRawDataHeaders)
-    const errors = useSelector(selectRawDataErrors)
-    if (!allData) {
-        return null
-    }
-
     const onDataExpandCollapseClicked = () => {
         setIsDataCollapsed(!isDataCollapsed)
     }
-
-    const data = isDataCollapsed ? allData.slice(0, PREVIEW_SIZE) : allData
+    const collapsedData = isDataCollapsed ? data.slice(0, PREVIEW_SIZE) : data
     return (
         <div className={className}>
             <DataTableContainer>
                 <table>
-                    <RawDataHeaders headers={headers} />
-                    {data.map((datum, i) => (
-                        <RawDatumView datum={datum} headers={headers} key={i} />
-                    ))}
+                    <thead>
+                        <DataTableHeaders headers={headers} />
+                    </thead>
+                    <tbody>
+                        {collapsedData.map((datum, i) => (
+                            <DataTableRow
+                                datum={datum}
+                                headers={headers}
+                                key={i}
+                            />
+                        ))}
+                    </tbody>
                 </table>
                 <DataTableExpandCollapseContainer
                     isDataCollapsed={isDataCollapsed}
@@ -43,7 +45,7 @@ const RawDataView: React.FunctionComponent<Props> = ({ className = '' }) => {
                     <button>{isDataCollapsed ? '↓' : '↑'}</button>
                 </DataTableExpandCollapseContainer>
             </DataTableContainer>
-            <RawDataErrors errors={errors} />
+            <DataTableErrors errors={errors} />
         </div>
     )
 }
@@ -55,10 +57,11 @@ const DataTableExpandCollapseContainer = styled.div<{
     ${(props) => (props.isDataCollapsed ? `position: absolute;` : '')}
 `
 
-export default styled(React.memo(RawDataView))`
+export default styled(React.memo(DataTable))`
     ${DataTableContainer} {
         position: relative;
         ${DataTableExpandCollapseContainer} {
+            cursor: pointer;
             bottom: 0;
             left: 0;
             width: 100%;

@@ -1,22 +1,22 @@
 import React from 'react'
 import styled from 'styled-components/macro'
-import { DataHeaders, RawDatum } from '../../types'
+import { DataHeaders, AnyDatum } from '../../types'
 
 export interface Props {
-    datum: RawDatum
+    datum: AnyDatum
     headers: DataHeaders
     className?: string
 }
 
-const RawDatumView: React.FunctionComponent<Props> = ({ 
+const DataTableRow: React.FunctionComponent<Props> = ({ 
     datum, headers,
     className = ''
 }) => {
     return (
         <tr className={className}>
-            {headers.map(header => <td>{datum[header]}</td>)}
+            {headers.map(header => <td key={header}>{datum[header]}</td>)}
         </tr>
     )
 }
 
-export default styled(React.memo(RawDatumView))``
+export default styled(React.memo(DataTableRow))``

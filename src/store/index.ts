@@ -2,9 +2,11 @@ import { combineReducers, createStore, applyMiddleware, compose } from 'redux'
 import rootSaga from './sagas'
 import createSagaMiddleware from 'redux-saga'
 import { rawDataReducer } from './raw-data'
+import { vcfFieldMappingReducer } from './vcf-field-mapping'
 
 const rootReducer = combineReducers({
     rawData: rawDataReducer,
+    vcfFieldMapping: vcfFieldMappingReducer,
 })
 
 const sagaMiddleware = createSagaMiddleware()

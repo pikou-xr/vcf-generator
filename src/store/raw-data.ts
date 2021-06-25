@@ -1,10 +1,6 @@
 import { RawData } from '../types'
 import { ParseError, ParseResult } from '../utils/parsing'
 
-// ---------- Types definitions ---------- //
-
-// empty
-
 // ------------- Action Types ------------ //
 export const RAW_DATA_LOAD_LOCAL = 'RAW_DATA_LOAD_LOCAL'
 export const RAW_DATA_LOAD_COMPLETE = 'RAW_DATA_LOAD_COMPLETE'

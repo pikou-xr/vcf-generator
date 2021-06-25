@@ -8,7 +8,7 @@ export interface Props {
     className?: string
 }
 
-const RawDataErrors: React.FunctionComponent<Props> = ({ 
+const DataTableErrors: React.FunctionComponent<Props> = ({ 
     errors,
     className = ''
 }) => {
@@ -25,7 +25,7 @@ const RawDataErrors: React.FunctionComponent<Props> = ({
     )
 }
 
-export default styled(React.memo(RawDataErrors))`
+export default styled(React.memo(DataTableErrors))`
     & > div {
         color: ${theme.colors.error};
     }

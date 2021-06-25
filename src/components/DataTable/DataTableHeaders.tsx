@@ -7,15 +7,15 @@ export interface Props {
     className?: string
 }
 
-const RawDataHeaders: React.FunctionComponent<Props> = ({ 
+const DataTableHeaders: React.FunctionComponent<Props> = ({ 
     headers,
     className = ''
 }) => {
     return (
         <tr className={className}>
-            {headers.map(fieldName => <th>{fieldName}</th>)}
+            {headers.map(fieldName => <th key={fieldName}>{fieldName}</th>)}
         </tr>
     )
 }
 
-export default styled(React.memo(RawDataHeaders))``
+export default styled(React.memo(DataTableHeaders))``
