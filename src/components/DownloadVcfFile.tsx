@@ -11,10 +11,10 @@ export interface Props {
     className?: string
 }
 
-const DownloadVcfFile: React.FunctionComponent<Props> = ({ 
-    className = ''
+const DownloadVcfFile: React.FunctionComponent<Props> = ({
+    className = '',
 }) => {
-    const {vcfContacts} = useSelector(selectVcfContactsAndErrors)
+    const { vcfContacts } = useSelector(selectVcfContactsAndErrors)
     const onDownloadClicked = () => {
         const vCardStr = contactsToVcard(vcfContacts)
         forceDownload(FILENAME, vCardStr, 'text/vcard')
@@ -22,7 +22,9 @@ const DownloadVcfFile: React.FunctionComponent<Props> = ({
     return (
         <div className={className}>
             {/* TODO : i18n */}
-            <button onClick={onDownloadClicked}>Télécharger "{FILENAME}"</button>
+            <button onClick={onDownloadClicked}>
+                Télécharger "{FILENAME}"
+            </button>
         </div>
     )
 }

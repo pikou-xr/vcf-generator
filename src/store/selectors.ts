@@ -1,9 +1,8 @@
-import { RootState } from "."
-import { FormatError, formatPhoneNumber } from "../utils/formatting"
-import { VcfContact, VCF_FIELD_NAMES } from "../utils/vcf"
+import { RootState } from '.'
+import { FormatError, formatPhoneNumber } from '../utils/formatting'
+import { VcfContact, VCF_FIELD_NAMES } from '../utils/vcf'
 
-export const selectRawData = (state: RootState) => 
-    state.rawData.data
+export const selectRawData = (state: RootState) => state.rawData.data
 
 export const selectRawDataSafe = (state: RootState) => {
     if (!state.rawData.data) {
@@ -22,8 +21,7 @@ export const selectRawDataHeaders = (state: RootState) => {
     return Object.keys(rawData[0])
 }
 
-export const selectVcfFieldMapping = (state: RootState) => 
-    state.vcfFieldMapping
+export const selectVcfFieldMapping = (state: RootState) => state.vcfFieldMapping
 
 export const selectVcfContactsAndErrors = (state: RootState) => {
     const rawData = selectRawDataSafe(state)
@@ -31,10 +29,10 @@ export const selectVcfContactsAndErrors = (state: RootState) => {
     const prefix = selectOutputOptionsPrefix(state)
     const vcfContacts: Array<VcfContact> = []
     const errors: Array<Error> = []
-    rawData.forEach(rawData => {
+    rawData.forEach((rawData) => {
         const vcfContact: Partial<VcfContact> = {}
         let contactError: Error | null = null
-        VCF_FIELD_NAMES.forEach(vcfFieldName => {
+        VCF_FIELD_NAMES.forEach((vcfFieldName) => {
             const rawDataFieldName = fieldMapping[vcfFieldName]
             if (rawDataFieldName) {
                 let value = rawData[rawDataFieldName]
@@ -44,7 +42,7 @@ export const selectVcfContactsAndErrors = (state: RootState) => {
                 if (vcfFieldName === 'workPhone') {
                     try {
                         value = formatPhoneNumber(value)
-                    } catch(err) {
+                    } catch (err) {
                         if (err instanceof FormatError) {
                             contactError = err
                         } else {
@@ -61,8 +59,8 @@ export const selectVcfContactsAndErrors = (state: RootState) => {
             errors.push(contactError)
         }
     })
-    return {vcfContacts, errors}
+    return { vcfContacts, errors }
 }
 
-export const selectOutputOptionsPrefix = (state: RootState) => 
+export const selectOutputOptionsPrefix = (state: RootState) =>
     state.outputOptions.prefix

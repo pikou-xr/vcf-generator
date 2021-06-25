@@ -1,5 +1,11 @@
-import { all, takeLatest, call, put, StrictEffect, select } from 'redux-saga/effects'
-import { RawData } from '../types'
+import {
+    all,
+    takeLatest,
+    call,
+    put,
+    StrictEffect,
+    select,
+} from 'redux-saga/effects'
 import { parseCsv, ParseResult } from '../utils/parsing'
 import { getDefaultVcfFieldMapping } from '../utils/vcf'
 import {
@@ -9,34 +15,6 @@ import {
 } from './raw-data'
 import { selectRawDataHeaders } from './selectors'
 import { setVcfFieldMapping } from './vcf-field-mapping'
-
-function* getAllRawData() {
-    // const results: MultipleResultsWithErrors = yield loadSeveralCollectionsAndErrors(
-    //     configDb,
-    //     ['someModel']
-    // )
-    // const loadedData: { [key: string]: any } = {}
-    // const errors: Array<[string, Error]> = []
-    // Object.entries(results).forEach(
-    //     ([collectionId, [error, validatedData]]) => {
-    //         if (validatedData) {
-    //             loadedData[collectionId] = validatedData
-    //         }
-    //         if (error) {
-    //             errors.push([collectionId, error])
-    //         }
-    //     }
-    // )
-    // if (errors.length === 0) {
-    //     yield put(
-    //         rawDataLoadSuccess({
-    //             someModel: loadedData.someModel,
-    //         })
-    //     )
-    // } else {
-    //     yield put(rawDataLoadError(errors))
-    // }
-}
 
 function* rawDataLoadLocalSaga(
     action: RawDataLoadLocal

@@ -10,9 +10,12 @@ export interface Props {
 
 const DragDropFile: React.FunctionComponent<Props> = ({ className = '' }) => {
     const dispatch = useDispatch()
-    const onDrop = useCallback(([file]) => {
-        dispatch(rawDataLoadLocal(file))
-    }, [dispatch])
+    const onDrop = useCallback(
+        ([file]) => {
+            dispatch(rawDataLoadLocal(file))
+        },
+        [dispatch]
+    )
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
     })
@@ -22,10 +25,10 @@ const DragDropFile: React.FunctionComponent<Props> = ({ className = '' }) => {
         <div {...getRootProps()} className={className}>
             <input {...getInputProps()} multiple={false} />
             {isDragActive ? (
-                <p>Drop the files here ...</p>
+                <p>Drop le fichier ici ...</p>
             ) : (
                 <p>
-                    Drag 'n' drop some files here, or click to select files
+                    Drag n drop un fichier CSV ici, ou clique pour sélectionner
                 </p>
             )}
         </div>

@@ -79,7 +79,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     h1, h2 {
-        
+        font-family: ${theme.fonts.titles};
     }
 
     h2 {

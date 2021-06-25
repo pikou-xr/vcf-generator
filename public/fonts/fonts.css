@@ -1,0 +1,10 @@
+@font-face {
+    font-family: "Crimson";
+    src: url("./Crimson_Text/crimsontext-regular-webfont.woff") format("woff"), 
+        url("./Crimson_Text/crimsontext-regular-webfont.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "fucxed";
+    src: url("./FUCXEDSTENCIL-Regular.woff") format("woff");
+}

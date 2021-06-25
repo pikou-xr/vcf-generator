@@ -1,4 +1,4 @@
-import {parsePhoneNumberFromString} from 'libphonenumber-js'
+import { parsePhoneNumberFromString } from 'libphonenumber-js'
 import { PhoneNumber } from '../types'
 
 export class FormatError extends Error {}

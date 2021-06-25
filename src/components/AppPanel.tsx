@@ -7,17 +7,15 @@ export type Props = PropsWithChildren<{
     className?: string
 }>
 
-const AppPanel: React.FunctionComponent<Props> = ({ 
+const AppPanel: React.FunctionComponent<Props> = ({
     title,
     children,
-    className = ''
+    className = '',
 }) => {
     return (
         <div className={className}>
             <h2>{title}</h2>
-            <Container>
-                {children}
-            </Container>
+            <Container>{children}</Container>
         </div>
     )
 }

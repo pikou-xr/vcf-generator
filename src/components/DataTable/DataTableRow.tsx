@@ -8,13 +8,16 @@ export interface Props {
     className?: string
 }
 
-const DataTableRow: React.FunctionComponent<Props> = ({ 
-    datum, headers,
-    className = ''
+const DataTableRow: React.FunctionComponent<Props> = ({
+    datum,
+    headers,
+    className = '',
 }) => {
     return (
         <tr className={className}>
-            {headers.map(header => <td key={header}>{datum[header]}</td>)}
+            {headers.map((header) => (
+                <td key={header}>{datum[header]}</td>
+            ))}
         </tr>
     )
 }

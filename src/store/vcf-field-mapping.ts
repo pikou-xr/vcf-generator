@@ -30,7 +30,7 @@ export function vcfFieldMappingReducer(
 ): VcfFieldMapping {
     switch (action.type) {
         case VCF_FIELD_MAPPING_SET:
-            return {...state, ...action.payload}
+            return { ...state, ...action.payload }
         default:
             return state
     }

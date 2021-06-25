@@ -61,8 +61,12 @@ const AddOptionalVcfField: React.FunctionComponent<Props> = ({
                 <StyledSelect
                     options={vcfFieldOptions}
                     onChange={onSelectChanged}
-                    value={selectedVcfFieldName ? vcfFieldNameToOption(selectedVcfFieldName): null}
-                    classNamePrefix='react-select'
+                    value={
+                        selectedVcfFieldName
+                            ? vcfFieldNameToOption(selectedVcfFieldName)
+                            : null
+                    }
+                    classNamePrefix="react-select"
                 ></StyledSelect>
             ) : null}
             {/* TODO : i18n */}

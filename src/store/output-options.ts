@@ -9,9 +9,7 @@ export interface SetOutputOptionsPrefix {
 export type OutputOptionsTypes = SetOutputOptionsPrefix
 
 // ------------ Action Creators ---------- //
-export const setOutputOptionsPrefix = (
-    prefix: string
-): OutputOptionsTypes => {
+export const setOutputOptionsPrefix = (prefix: string): OutputOptionsTypes => {
     return {
         type: OUTPUT_OPTIONS_SET_PREFIX,
         payload: prefix,
@@ -24,7 +22,7 @@ export interface OutputOptionsState {
 }
 
 const initialState: OutputOptionsState = {
-    prefix: 'XR ACTION '
+    prefix: 'XR ACTION ',
 }
 
 // ---------------- Reducer -------------- //
@@ -34,7 +32,7 @@ export function outoutOptionsReducer(
 ): OutputOptionsState {
     switch (action.type) {
         case OUTPUT_OPTIONS_SET_PREFIX:
-            return {...state, prefix: action.payload}
+            return { ...state, prefix: action.payload }
         default:
             return state
     }

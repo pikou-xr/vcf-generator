@@ -7,13 +7,15 @@ export interface Props {
     className?: string
 }
 
-const DataTableHeaders: React.FunctionComponent<Props> = ({ 
+const DataTableHeaders: React.FunctionComponent<Props> = ({
     headers,
-    className = ''
+    className = '',
 }) => {
     return (
         <tr className={className}>
-            {headers.map(fieldName => <th key={fieldName}>{fieldName}</th>)}
+            {headers.map((fieldName) => (
+                <th key={fieldName}>{fieldName}</th>
+            ))}
         </tr>
     )
 }

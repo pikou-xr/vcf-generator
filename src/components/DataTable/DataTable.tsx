@@ -1,5 +1,6 @@
 import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components/macro'
+import theme from '../../theme'
 import { DataHeaders } from '../../types'
 import DataTableErrors from './DataTableErrors'
 import DataTableHeaders from './DataTableHeaders'
@@ -51,6 +52,7 @@ const DataTable = <D,>({
 const DataTableContainer = styled.div``
 
 export default styled(React.memo(DataTable))`
+    color: ${theme.colors.tableContent};
     ${DataTableContainer} {
         position: relative;
         max-height: 10em;

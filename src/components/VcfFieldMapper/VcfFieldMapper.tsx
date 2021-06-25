@@ -1,7 +1,10 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
-import { selectRawDataHeaders, selectVcfFieldMapping } from '../../store/selectors'
+import {
+    selectRawDataHeaders,
+    selectVcfFieldMapping,
+} from '../../store/selectors'
 import { VCF_FIELD_NAMES } from '../../utils/vcf'
 import AddOptionalVcfField from './AddOptionalVcfField'
 import FieldPicker from './FieldPicker'
@@ -15,14 +18,16 @@ const VcfFieldMapper: React.FunctionComponent<Props> = ({ className = '' }) => {
     const vcfFieldMapping = useSelector(selectVcfFieldMapping)
     return (
         <div className={className}>
-            {VCF_FIELD_NAMES.map((vcfFieldName) => (
-                vcfFieldMapping[vcfFieldName] !== null ? (<FieldPicker
-                    key={vcfFieldName}
-                    vcfFieldName={vcfFieldName}
-                    choices={rawDataHeaders}
-                    selected={vcfFieldMapping[vcfFieldName]}
-                />) : null
-            ))}
+            {VCF_FIELD_NAMES.map((vcfFieldName) =>
+                vcfFieldMapping[vcfFieldName] !== null ? (
+                    <FieldPicker
+                        key={vcfFieldName}
+                        vcfFieldName={vcfFieldName}
+                        choices={rawDataHeaders}
+                        selected={vcfFieldMapping[vcfFieldName]}
+                    />
+                ) : null
+            )}
             <AddOptionalVcfField vcfFieldMapping={vcfFieldMapping} />
         </div>
     )
@@ -30,6 +35,6 @@ const VcfFieldMapper: React.FunctionComponent<Props> = ({ className = '' }) => {
 
 export default styled(React.memo(VcfFieldMapper))`
     ${FieldPicker} {
-        margin-bottom : 0.5em;
+        margin-bottom: 0.5em;
     }
 `

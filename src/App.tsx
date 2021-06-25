@@ -14,12 +14,36 @@ const App = ({ className = '' }) => {
     const rawData = useSelector(selectRawData)
     return (
         <div className={className}>
-            <AppPanel title="1. Upload un fichier CSV"><DragDropFile /></AppPanel>
-            {rawData ? <AppPanel title="2. Données brutes"><RawDataView /></AppPanel> : null}
-            {rawData ? <AppPanel title="3. Selection des champs à exporter"><VcfFieldMapper /></AppPanel> : null}
-            {rawData ? <AppPanel title="4. Données exportées"><VcfContactsView /></AppPanel> : null}
-            {rawData ? <AppPanel title="5. Options"><OutputOptions /></AppPanel> : null}
-            {rawData ? <AppPanel title="6. Export"><DownloadVcfFile /></AppPanel> : null}
+            {/* TODO : i18n */}
+            <h1>Générateur de fichier de contacts</h1>
+            <AppPanel title="1. Upload un fichier CSV">
+                <DragDropFile />
+            </AppPanel>
+            {rawData ? (
+                <AppPanel title="2. Données brutes">
+                    <RawDataView />
+                </AppPanel>
+            ) : null}
+            {rawData ? (
+                <AppPanel title="3. Selection des champs à exporter">
+                    <VcfFieldMapper />
+                </AppPanel>
+            ) : null}
+            {rawData ? (
+                <AppPanel title="4. Données exportées">
+                    <VcfContactsView />
+                </AppPanel>
+            ) : null}
+            {rawData ? (
+                <AppPanel title="5. Options">
+                    <OutputOptions />
+                </AppPanel>
+            ) : null}
+            {rawData ? (
+                <AppPanel title="6. Export">
+                    <DownloadVcfFile />
+                </AppPanel>
+            ) : null}
         </div>
     )
 }

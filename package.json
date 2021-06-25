@@ -29,7 +29,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier": "npx prettier --config .prettierrc.json --write --ignore-unknown '**/*.{ts,tsx,html}'",
+    "deploy-build": "rm -rf docs ; PUBLIC_URL=https://pikou-xr.github.io/vcf-generator/ npm run build ; mv build docs"
   },
   "eslintConfig": {
     "extends": [

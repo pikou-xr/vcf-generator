@@ -1,10 +1,6 @@
 import React from 'react'
 import styled from 'styled-components/macro'
-import {
-    DataHeaders,
-    FieldName,
-    SelectOptionValue,
-} from '../../types'
+import { DataHeaders, FieldName, SelectOptionValue } from '../../types'
 import { setVcfFieldMapping } from '../../store/vcf-field-mapping'
 import { useDispatch } from 'react-redux'
 import {
@@ -46,7 +42,7 @@ const FieldPicker: React.FunctionComponent<Props> = ({
             <VcfFieldNameContainer>{displayVcfFieldName}</VcfFieldNameContainer>
             <ArrowContainer>→</ArrowContainer>
             <StyledSelect
-                classNamePrefix='react-select'
+                classNamePrefix="react-select"
                 options={options}
                 value={selected ? rawDataFieldNameToOption(selected) : null}
                 onChange={onValueChange}
