@@ -28,4 +28,8 @@ const VcfFieldMapper: React.FunctionComponent<Props> = ({ className = '' }) => {
     )
 }
 
-export default styled(React.memo(VcfFieldMapper))``
+export default styled(React.memo(VcfFieldMapper))`
+    ${FieldPicker} {
+        margin-bottom : 0.5em;
+    }
+`

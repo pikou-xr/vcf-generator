@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
 import styled from 'styled-components/macro'
-import Select from 'react-select'
 import { SelectOptionValue } from '../../types'
-import { VcfFieldMapping, VcfFieldName, VCF_FIELD_NAMES, VCF_FIELD_NAMES_REQUIRED } from '../../utils/vcf'
+import {
+    VcfFieldMapping,
+    VcfFieldName,
+    VCF_FIELD_NAMES,
+    VCF_FIELD_NAMES_REQUIRED,
+} from '../../utils/vcf'
 import { useDispatch } from 'react-redux'
 import { setVcfFieldMapping } from '../../store/vcf-field-mapping'
+import StyledSelect from '../StyledSelect'
 
 const vcfFieldNameToOption = (vcfFieldName: VcfFieldName) => ({
     value: vcfFieldName,
@@ -24,8 +29,9 @@ const AddOptionalVcfField: React.FunctionComponent<Props> = ({
     const [isAddingVcfField, setIsAddingVcfField] = useState(false)
     const [selectedVcfFieldName, setSelectedVcfFieldName] =
         useState<null | VcfFieldName>(null)
-    const vcfFieldOptions = VCF_FIELD_NAMES.filter((vcfFieldName) =>
-        !VCF_FIELD_NAMES_REQUIRED.includes(vcfFieldName)
+
+    const vcfFieldOptions = VCF_FIELD_NAMES.filter(
+        (vcfFieldName) => !VCF_FIELD_NAMES_REQUIRED.includes(vcfFieldName)
     )
         .filter((vcfFieldName) => vcfFieldMapping[vcfFieldName] === null)
         .map(vcfFieldNameToOption)
@@ -36,20 +42,28 @@ const AddOptionalVcfField: React.FunctionComponent<Props> = ({
     }
     const onSelectChanged = (option: SelectOptionValue) =>
         setSelectedVcfFieldName(option.value as VcfFieldName)
-    
+
     const onOkClicked = () => {
         if (!selectedVcfFieldName) {
             return
         }
         dispatch(setVcfFieldMapping({ [selectedVcfFieldName]: '' }))
+        setSelectedVcfFieldName(null)
+        setIsAddingVcfField(false)
     }
     return (
         <div className={className}>
             <button onClick={onAddFieldClicked}>
-                {isAddingVcfField ? '✕' : '+'}
+                {/* TODO : i18n */}
+                {isAddingVcfField ? '✕' : 'Ajouter champ'}
             </button>
             {isAddingVcfField ? (
-                <StyledSelect options={vcfFieldOptions} onChange={onSelectChanged} value={selectedVcfFieldName}></StyledSelect>
+                <StyledSelect
+                    options={vcfFieldOptions}
+                    onChange={onSelectChanged}
+                    value={selectedVcfFieldName ? vcfFieldNameToOption(selectedVcfFieldName): null}
+                    classNamePrefix='react-select'
+                ></StyledSelect>
             ) : null}
             {/* TODO : i18n */}
             {isAddingVcfField ? (
@@ -64,7 +78,6 @@ const AddOptionalVcfField: React.FunctionComponent<Props> = ({
     )
 }
 
-const StyledSelect = styled(Select)``
 export default styled(React.memo(AddOptionalVcfField))`
     display: flex;
     ${StyledSelect} {

@@ -30,4 +30,8 @@ const OutputOptions: React.FunctionComponent<Props> = ({ className = '' }) => {
 
 // Wrapping in styled component allows to use the exported component
 // as a selector directly in other styled-components css code.
-export default styled(React.memo(OutputOptions))``
+export default styled(React.memo(OutputOptions))`
+    input {
+        margin-left: 1em;
+    }
+`

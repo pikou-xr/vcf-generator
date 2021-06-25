@@ -46,6 +46,57 @@ const GlobalStyle = createGlobalStyle`
         }
         font-family: ${theme.fonts.default};
     }
+
+    *::-webkit-scrollbar {
+        width: 0.5em;
+        height: 0.5em;
+    }
+       
+    *::-webkit-scrollbar-thumb {
+        background-color: ${theme.colors.scrollBg};
+        outline: 1px solid ${theme.colors.scrollBg};
+    }
+
+    * {
+        scrollbar-color: ${theme.colors.scroll} ${theme.colors.scrollBg};
+        scrollbar-width: thin;
+    }
+
+    button, input {
+        border:  1px ${theme.colors.main} solid;
+        border-radius: 0.3em;
+        font-family: ${theme.fonts.default};
+        color: ${theme.colors.main};
+        padding: 0.5em;
+    }
+
+    button {
+        background-color: ${theme.colors.backgroundButton};
+    }
+
+    input {
+        background-color: transparent;
+    }
+
+    h1, h2 {
+        
+    }
+
+    h2 {
+        color: ${theme.colors.title2};
+    }
+
+    /* TODO : Move from here */
+    .react-select__menu-list {
+        background-color: ${theme.colors.background2};
+        .react-select__option {
+            background-color: ${theme.colors.background2};
+            cursor: pointer;
+            &.react-select__option--is-focused {
+                background-color: ${theme.colors.highlight};
+            }
+        }
+    }
 `
 
 ReactDOM.render(

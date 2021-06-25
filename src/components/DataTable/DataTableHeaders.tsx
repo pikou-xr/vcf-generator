@@ -18,4 +18,8 @@ const DataTableHeaders: React.FunctionComponent<Props> = ({
     )
 }
 
-export default styled(React.memo(DataTableHeaders))``
+export default styled(React.memo(DataTableHeaders))`
+    th {
+        text-align: left;
+    }
+`

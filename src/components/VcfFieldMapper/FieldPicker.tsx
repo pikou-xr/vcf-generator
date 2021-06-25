@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components/macro'
-import Select from 'react-select'
 import {
     DataHeaders,
     FieldName,
@@ -13,6 +12,7 @@ import {
     VcfFieldName,
     VCF_FIELD_NAMES_REQUIRED,
 } from '../../utils/vcf'
+import StyledSelect from '../StyledSelect'
 
 export interface Props {
     vcfFieldName: VcfFieldName
@@ -46,6 +46,7 @@ const FieldPicker: React.FunctionComponent<Props> = ({
             <VcfFieldNameContainer>{displayVcfFieldName}</VcfFieldNameContainer>
             <ArrowContainer>→</ArrowContainer>
             <StyledSelect
+                classNamePrefix='react-select'
                 options={options}
                 value={selected ? rawDataFieldNameToOption(selected) : null}
                 onChange={onValueChange}
@@ -57,7 +58,6 @@ const FieldPicker: React.FunctionComponent<Props> = ({
     )
 }
 
-const StyledSelect = styled(Select)``
 const VcfFieldNameContainer = styled.span``
 const ArrowContainer = styled.span``
 
