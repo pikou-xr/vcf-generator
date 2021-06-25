@@ -1,20 +1,24 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 import Select from 'react-select'
-import { DataHeaders, FieldName, VcfFieldName } from '../../types'
+import {
+    DataHeaders,
+    FieldName,
+    SelectOptionValue,
+} from '../../types'
 import { setVcfFieldMapping } from '../../store/vcf-field-mapping'
 import { useDispatch } from 'react-redux'
+import {
+    VCF_FIELD_NAMES_DISPLAY,
+    VcfFieldName,
+    VCF_FIELD_NAMES_REQUIRED,
+} from '../../utils/vcf'
 
 export interface Props {
     vcfFieldName: VcfFieldName
     choices: DataHeaders
     selected: FieldName | null
     className?: string
-}
-
-interface OptionValue {
-    value: FieldName
-    label: string
 }
 
 const rawDataFieldNameToOption = (rawDataFieldName: FieldName) => ({
@@ -28,20 +32,27 @@ const FieldPicker: React.FunctionComponent<Props> = ({
     selected,
     className = '',
 }) => {
-    console.log(vcfFieldName, selected)
+    const isRequiredVcfField = VCF_FIELD_NAMES_REQUIRED.includes(vcfFieldName)
     const dispatch = useDispatch()
     const options = choices.map(rawDataFieldNameToOption)
-    const onValueChange = (option: OptionValue) =>
+    const displayVcfFieldName =
+        (VCF_FIELD_NAMES_DISPLAY as any)[vcfFieldName] || vcfFieldName
+    const onValueChange = (option: SelectOptionValue) =>
         dispatch(setVcfFieldMapping({ [vcfFieldName]: option.value }))
+    const onCloseClicked = () =>
+        dispatch(setVcfFieldMapping({ [vcfFieldName]: null }))
     return (
         <div className={className}>
-            <VcfFieldNameContainer>{vcfFieldName}</VcfFieldNameContainer>
+            <VcfFieldNameContainer>{displayVcfFieldName}</VcfFieldNameContainer>
             <ArrowContainer>→</ArrowContainer>
             <StyledSelect
                 options={options}
-                value={selected ? rawDataFieldNameToOption(selected): null}
+                value={selected ? rawDataFieldNameToOption(selected) : null}
                 onChange={onValueChange}
             />
+            {isRequiredVcfField ? null : (
+                <button onClick={onCloseClicked}>✕</button>
+            )}
         </div>
     )
 }

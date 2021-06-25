@@ -12,21 +12,33 @@ export interface Props<D> {
     className?: string
     data: Array<D>
     headers: DataHeaders
+    headersDisplayMapping?: { [fieldName: string]: string }
     errors: Array<Error>
 }
 
-const DataTable = <D, >({data, headers, errors, className = ''}: PropsWithChildren<Props<D>>) => {
+const DataTable = <D,>({
+    data,
+    headers,
+    headersDisplayMapping,
+    errors,
+    className = '',
+}: PropsWithChildren<Props<D>>) => {
     const [isDataCollapsed, setIsDataCollapsed] = useState(true)
     const onDataExpandCollapseClicked = () => {
         setIsDataCollapsed(!isDataCollapsed)
     }
+    const headersDisplay = headersDisplayMapping
+        ? headers.map(
+              (fieldName) => headersDisplayMapping[fieldName] || fieldName
+          )
+        : headers
     const collapsedData = isDataCollapsed ? data.slice(0, PREVIEW_SIZE) : data
     return (
         <div className={className}>
             <DataTableContainer>
                 <table>
                     <thead>
-                        <DataTableHeaders headers={headers} />
+                        <DataTableHeaders headers={headersDisplay} />
                     </thead>
                     <tbody>
                         {collapsedData.map((datum, i) => (

@@ -1,12 +1,14 @@
-import parsePhoneNumber from 'libphonenumber-js'
+import {parsePhoneNumberFromString} from 'libphonenumber-js'
 import { PhoneNumber } from '../types'
 
-class FormatError extends Error {}
+export class FormatError extends Error {}
 
 export const formatPhoneNumber = (phoneString: string): PhoneNumber => {
-    const phoneNumber = parsePhoneNumber(phoneString)
+    // TODO : configutable country code
+    const phoneNumber = parsePhoneNumberFromString(phoneString, 'FR')
     if (phoneNumber && phoneNumber.isValid()) {
         return phoneNumber.number as PhoneNumber
     }
-    throw new FormatError(`Invalid phone number ${phoneString}`)
+    // TODO : i18n
+    throw new FormatError(`Invalid phone number "${phoneString}"`)
 }

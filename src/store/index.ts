@@ -3,10 +3,12 @@ import rootSaga from './sagas'
 import createSagaMiddleware from 'redux-saga'
 import { rawDataReducer } from './raw-data'
 import { vcfFieldMappingReducer } from './vcf-field-mapping'
+import { outoutOptionsReducer } from './output-options'
 
 const rootReducer = combineReducers({
     rawData: rawDataReducer,
     vcfFieldMapping: vcfFieldMappingReducer,
+    outputOptions: outoutOptionsReducer,
 })
 
 const sagaMiddleware = createSagaMiddleware()

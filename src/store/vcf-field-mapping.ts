@@ -1,5 +1,4 @@
-import { VcfFieldMapping } from '../types'
-import { getEmptyVcfFieldMapping } from '../utils/vcf'
+import { getEmptyVcfFieldMapping, VcfFieldMapping } from '../utils/vcf'
 
 // ------------- Action Types ------------ //
 export const VCF_FIELD_MAPPING_SET = 'VCF_FIELD_MAPPING_SET'

@@ -1,8 +1,9 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
-import { VCF_FIELD_NAMES } from '../../constants'
 import { selectRawDataHeaders, selectVcfFieldMapping } from '../../store/selectors'
+import { VCF_FIELD_NAMES } from '../../utils/vcf'
+import AddOptionalVcfField from './AddOptionalVcfField'
 import FieldPicker from './FieldPicker'
 
 export interface Props {
@@ -15,13 +16,14 @@ const VcfFieldMapper: React.FunctionComponent<Props> = ({ className = '' }) => {
     return (
         <div className={className}>
             {VCF_FIELD_NAMES.map((vcfFieldName) => (
-                <FieldPicker
+                vcfFieldMapping[vcfFieldName] !== null ? (<FieldPicker
                     key={vcfFieldName}
                     vcfFieldName={vcfFieldName}
                     choices={rawDataHeaders}
                     selected={vcfFieldMapping[vcfFieldName]}
-                />
+                />) : null
             ))}
+            <AddOptionalVcfField vcfFieldMapping={vcfFieldMapping} />
         </div>
     )
 }

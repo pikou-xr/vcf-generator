@@ -1,6 +1,6 @@
 import { RootState } from "."
-import { VCF_FIELD_NAMES } from "../constants"
-import { VcfContact } from "../types"
+import { FormatError, formatPhoneNumber } from "../utils/formatting"
+import { VcfContact, VCF_FIELD_NAMES } from "../utils/vcf"
 
 export const selectRawData = (state: RootState) => 
     state.rawData.data
@@ -28,19 +28,41 @@ export const selectVcfFieldMapping = (state: RootState) =>
 export const selectVcfContactsAndErrors = (state: RootState) => {
     const rawData = selectRawDataSafe(state)
     const fieldMapping = selectVcfFieldMapping(state)
+    const prefix = selectOutputOptionsPrefix(state)
     const vcfContacts: Array<VcfContact> = []
     const errors: Array<Error> = []
     rawData.forEach(rawData => {
         const vcfContact: Partial<VcfContact> = {}
+        let contactError: Error | null = null
         VCF_FIELD_NAMES.forEach(vcfFieldName => {
             const rawDataFieldName = fieldMapping[vcfFieldName]
-            // TODO : means vcf contact can be incomplete ... PB !!! 
-            // rawDataFieldName shouldnt be null
             if (rawDataFieldName) {
-                vcfContact[vcfFieldName] = rawData[rawDataFieldName]
+                let value = rawData[rawDataFieldName]
+                if (vcfFieldName === 'firstName') {
+                    value = `${prefix}${value}`
+                }
+                if (vcfFieldName === 'workPhone') {
+                    try {
+                        value = formatPhoneNumber(value)
+                    } catch(err) {
+                        if (err instanceof FormatError) {
+                            contactError = err
+                        } else {
+                            throw err
+                        }
+                    }
+                }
+                vcfContact[vcfFieldName] = value
             }
         })
-        vcfContacts.push(vcfContact as VcfContact)
+        if (!contactError) {
+            vcfContacts.push(vcfContact as VcfContact)
+        } else {
+            errors.push(contactError)
+        }
     })
     return {vcfContacts, errors}
 }
+
+export const selectOutputOptionsPrefix = (state: RootState) => 
+    state.outputOptions.prefix

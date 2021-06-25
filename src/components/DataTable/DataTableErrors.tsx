@@ -20,7 +20,7 @@ const DataTableErrors: React.FunctionComponent<Props> = ({
     return (
         <div className={className}>
             {errorsTitle}
-            {errors.map(error => <div>{error.message}</div>)}
+            {errors.map((error, i) => <div key={i}>{error.message}</div>)}
         </div>
     )
 }
