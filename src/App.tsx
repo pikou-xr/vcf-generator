@@ -30,7 +30,7 @@ const App = ({ className = '' }) => {
                 </AppPanel>
             ) : null}
             {rawData ? (
-                <AppPanel title="4. Données exportées">
+                <AppPanel title="4. Contacts exportés">
                     <VcfContactsView />
                 </AppPanel>
             ) : null}
