@@ -9,6 +9,7 @@ import {
     VCF_FIELD_NAMES_REQUIRED,
 } from '../../utils/vcf'
 import StyledSelect from '../StyledSelect'
+import { rawDataFieldNameToOption } from '../../utils/select-field'
 
 export interface Props {
     vcfFieldName: VcfFieldName
@@ -16,11 +17,6 @@ export interface Props {
     selected: FieldName | null
     className?: string
 }
-
-const rawDataFieldNameToOption = (rawDataFieldName: FieldName) => ({
-    value: rawDataFieldName,
-    label: rawDataFieldName,
-})
 
 const FieldPicker: React.FunctionComponent<Props> = ({
     choices,
