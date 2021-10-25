@@ -20,7 +20,7 @@ const App = ({ className = '' }) => {
                 <DragDropFile />
             </AppPanel>
             {rawData ? (
-                <AppPanel title="2. Données brutes">
+                <AppPanel title="2. Aperçu des données brutes">
                     <RawDataView />
                 </AppPanel>
             ) : null}
@@ -30,13 +30,13 @@ const App = ({ className = '' }) => {
                 </AppPanel>
             ) : null}
             {rawData ? (
-                <AppPanel title="4. Contacts exportés">
-                    <VcfContactsView />
+                <AppPanel title="4. Options">
+                    <OutputOptions />
                 </AppPanel>
             ) : null}
             {rawData ? (
-                <AppPanel title="5. Options">
-                    <OutputOptions />
+                <AppPanel title="5. Aperçu des contacts exportés">
+                    <VcfContactsView />
                 </AppPanel>
             ) : null}
             {rawData ? (
