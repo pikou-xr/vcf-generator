@@ -44,8 +44,14 @@ export interface VcfFieldMapping {
 }
 
 // Helper function, guesses the right field name from `headers` by picking from options in `guessList`.
-const guessFieldName = (headers: DataHeaders, guessList: Array<string>, defaultFieldName: string | null) => {
-    const headersNormalized = headers.map(possibleName => possibleName.toLowerCase())
+const guessFieldName = (
+    headers: DataHeaders,
+    guessList: Array<string>,
+    defaultFieldName: string | null
+) => {
+    const headersNormalized = headers.map((possibleName) =>
+        possibleName.toLowerCase()
+    )
     let guessedFieldName: string | null = null
     for (let possibleName of guessList) {
         const headerIndex = headersNormalized.indexOf(possibleName)
@@ -68,8 +74,16 @@ export const getDefaultVcfFieldMapping = (
     headers: DataHeaders
 ): VcfFieldMapping => {
     return {
-        firstName: guessFieldName(headers, GUESS_NAME_FIELD_NAME, headers[0] || null),
-        workPhone: guessFieldName(headers, GUESS_PHONE_FIELD_NAME, headers[1] || null),
+        firstName: guessFieldName(
+            headers,
+            GUESS_NAME_FIELD_NAME,
+            headers[0] || null
+        ),
+        workPhone: guessFieldName(
+            headers,
+            GUESS_PHONE_FIELD_NAME,
+            headers[1] || null
+        ),
         email: null,
         note: null,
     }

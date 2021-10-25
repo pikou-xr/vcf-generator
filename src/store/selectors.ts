@@ -40,14 +40,14 @@ export const selectVcfContactsAndErrors = (state: RootState) => {
         groupNames.add(NO_GROUPING_KEY)
     }
 
-    const groupedResults: {[group: string]: ContactsAndErrors } = {}
+    const groupedResults: { [group: string]: ContactsAndErrors } = {}
 
-    groupNames.forEach(groupName => {
+    groupNames.forEach((groupName) => {
         const vcfContacts: Array<VcfContact> = []
         const errors: Array<Error> = []
-        const filteredRawData = 
-            groupByField ? 
-                rawData.filter(rawData => rawData[groupByField] === groupName) : rawData
+        const filteredRawData = groupByField
+            ? rawData.filter((rawData) => rawData[groupByField] === groupName)
+            : rawData
 
         filteredRawData.forEach((rawData) => {
             const vcfContact: Partial<VcfContact> = {}
@@ -79,17 +79,15 @@ export const selectVcfContactsAndErrors = (state: RootState) => {
                 errors.push(contactError)
             }
         })
-    
+
         groupedResults[groupName] = { vcfContacts, errors }
     })
 
     return groupedResults
-    
 }
 
 export const selectOutputOptionsPrefix = (state: RootState) =>
     state.outputOptions.prefix
-
 
 export const selectOutputOptionsGroupByField = (state: RootState) =>
     state.outputOptions.groupByField

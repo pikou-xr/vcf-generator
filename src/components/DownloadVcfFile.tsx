@@ -19,28 +19,28 @@ const DownloadVcfFile: React.FunctionComponent<Props> = ({
 }) => {
     const vcfContactsAndErrors = useSelector(selectVcfContactsAndErrors)
 
-    const downloadButtons = Object.entries(vcfContactsAndErrors).map(([group, {vcfContacts, errors}]) => {
-        const filename = group === NO_GROUPING_KEY ? NO_GROUPING_FILENAME : `${group.length ? group : NO_GROUP_NAME_BASENAME}.vcf`
-        const onDownloadClicked = () => {
-            const vCardStr = contactsToVcard(vcfContacts)
-            forceDownload(filename, vCardStr, 'text/vcard')
+    const downloadButtons = Object.entries(vcfContactsAndErrors).map(
+        ([group, { vcfContacts, errors }]) => {
+            const filename =
+                group === NO_GROUPING_KEY
+                    ? NO_GROUPING_FILENAME
+                    : `${group.length ? group : NO_GROUP_NAME_BASENAME}.vcf`
+            const onDownloadClicked = () => {
+                const vCardStr = contactsToVcard(vcfContacts)
+                forceDownload(filename, vCardStr, 'text/vcard')
+            }
+            return (
+                <div className={className}>
+                    {/* TODO : i18n */}
+                    <button onClick={onDownloadClicked}>
+                        Télécharger "{filename}"
+                    </button>
+                </div>
+            )
         }
-        return (
-            <div className={className}>
-                {/* TODO : i18n */}
-                <button onClick={onDownloadClicked}>
-                    Télécharger "{filename}"
-                </button>
-            </div>
-        )
-    })
-
-    return (
-        <Container>
-            {downloadButtons}
-        </Container>
     )
-    
+
+    return <Container>{downloadButtons}</Container>
 }
 
 const Container = styled.div``

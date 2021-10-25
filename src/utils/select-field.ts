@@ -1,6 +1,8 @@
-import { FieldName, SelectOptionValue } from "../types";
+import { FieldName, SelectOptionValue } from '../types'
 
-export const rawDataFieldNameToOption = (rawDataFieldName: FieldName): SelectOptionValue => ({
+export const rawDataFieldNameToOption = (
+    rawDataFieldName: FieldName
+): SelectOptionValue => ({
     value: rawDataFieldName,
     label: rawDataFieldName,
 })

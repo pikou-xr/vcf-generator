@@ -22,21 +22,27 @@ const Component: React.FunctionComponent<Props> = ({ className = '' }) => {
     const headers = Object.entries(vcfFieldMapping)
         .filter(([_, rawDataFieldName]) => rawDataFieldName !== null)
         .map(([vcfFieldName]) => vcfFieldName as unknown as VcfFieldName)
-    
+
     return (
         <Container>
-            {Object.entries(vcfContactsAndErrors).map(([group, {vcfContacts, errors}]) => (
-                <GroupContainer>
-                    {group !== NO_GROUPING_KEY ? <h3>{group.length ? group : NO_GROUP_NAME_LABEL}</h3> : null}
-                    <DataTable
-                        className={className}
-                        data={vcfContacts}
-                        headers={headers}
-                        headersDisplayMapping={VCF_FIELD_NAMES_DISPLAY}
-                        errors={errors}
-                    />
-                </GroupContainer>
-            ))}
+            {Object.entries(vcfContactsAndErrors).map(
+                ([group, { vcfContacts, errors }]) => (
+                    <GroupContainer>
+                        {group !== NO_GROUPING_KEY ? (
+                            <h3>
+                                {group.length ? group : NO_GROUP_NAME_LABEL}
+                            </h3>
+                        ) : null}
+                        <DataTable
+                            className={className}
+                            data={vcfContacts}
+                            headers={headers}
+                            headersDisplayMapping={VCF_FIELD_NAMES_DISPLAY}
+                            errors={errors}
+                        />
+                    </GroupContainer>
+                )
+            )}
         </Container>
     )
 }

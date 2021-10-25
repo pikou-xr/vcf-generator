@@ -1,8 +1,9 @@
-import { FieldName } from "../types"
+import { FieldName } from '../types'
 
 // ------------- Action Types ------------ //
 export const OUTPUT_OPTIONS_SET_PREFIX = 'OUTPUT_OPTIONS_SET_PREFIX'
-export const OUTPUT_OPTIONS_SET_GROUP_BY_FIELD = 'OUTPUT_OPTIONS_SET_GROUP_BY_FIELD'
+export const OUTPUT_OPTIONS_SET_GROUP_BY_FIELD =
+    'OUTPUT_OPTIONS_SET_GROUP_BY_FIELD'
 
 export interface SetOutputOptionsPrefix {
     type: typeof OUTPUT_OPTIONS_SET_PREFIX
@@ -14,7 +15,9 @@ export interface SetOutputOptionsGroupByField {
     payload: string | null
 }
 
-export type OutputOptionsTypes = SetOutputOptionsPrefix | SetOutputOptionsGroupByField
+export type OutputOptionsTypes =
+    | SetOutputOptionsPrefix
+    | SetOutputOptionsGroupByField
 
 // ------------ Action Creators ---------- //
 export const setOutputOptionsPrefix = (prefix: string): OutputOptionsTypes => {
@@ -24,7 +27,9 @@ export const setOutputOptionsPrefix = (prefix: string): OutputOptionsTypes => {
     }
 }
 
-export const setOutputOptionsGroupByField = (fieldName: FieldName | null): OutputOptionsTypes => {
+export const setOutputOptionsGroupByField = (
+    fieldName: FieldName | null
+): OutputOptionsTypes => {
     return {
         type: OUTPUT_OPTIONS_SET_GROUP_BY_FIELD,
         payload: fieldName,
@@ -39,7 +44,7 @@ export interface OutputOptionsState {
 
 const initialState: OutputOptionsState = {
     prefix: 'XR ACTION ',
-    groupByField: null
+    groupByField: null,
 }
 
 // ---------------- Reducer -------------- //

@@ -1,4 +1,4 @@
-import { VcfContact } from "./utils/vcf"
+import { VcfContact } from './utils/vcf'
 
 export type PhoneNumber = string
 
@@ -16,5 +16,6 @@ export interface SelectOptionValue {
 }
 
 export type ContactsAndErrors = {
-    vcfContacts: Array<VcfContact>, errors: Array<Error>
+    vcfContacts: Array<VcfContact>
+    errors: Array<Error>
 }

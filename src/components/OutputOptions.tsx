@@ -1,8 +1,15 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
-import { setOutputOptionsPrefix, setOutputOptionsGroupByField } from '../store/output-options'
-import { selectOutputOptionsGroupByField, selectOutputOptionsPrefix, selectRawDataHeaders } from '../store/selectors'
+import {
+    setOutputOptionsPrefix,
+    setOutputOptionsGroupByField,
+} from '../store/output-options'
+import {
+    selectOutputOptionsGroupByField,
+    selectOutputOptionsPrefix,
+    selectRawDataHeaders,
+} from '../store/selectors'
 import { SelectOptionValue } from '../types'
 import { rawDataFieldNameToOption } from '../utils/select-field'
 import StyledSelect from './StyledSelect'
@@ -19,14 +26,17 @@ const OutputOptions: React.FunctionComponent<Props> = ({ className = '' }) => {
     const prefix = useSelector(selectOutputOptionsPrefix)
     const groupByField = useSelector(selectOutputOptionsGroupByField)
     const rawDataHeaders = useSelector(selectRawDataHeaders)
-    const groupByFieldOptions = [GROUP_BY_FIELD_DEFAULT_OPTION, ...rawDataHeaders.map(rawDataFieldNameToOption)]
+    const groupByFieldOptions = [
+        GROUP_BY_FIELD_DEFAULT_OPTION,
+        ...rawDataHeaders.map(rawDataFieldNameToOption),
+    ]
     // TODO : i18n
 
     const onChangePrefix = (event: React.FormEvent<HTMLInputElement>) =>
         dispatch(setOutputOptionsPrefix(event.currentTarget.value))
     const onChangeGroupByField = (option: SelectOptionValue) =>
         dispatch(setOutputOptionsGroupByField(option.value))
-    
+
     return (
         <div className={className}>
             {/* TODO : i18n */}
@@ -46,7 +56,11 @@ const OutputOptions: React.FunctionComponent<Props> = ({ className = '' }) => {
                     id="outputOptionsGroupByField"
                     classNamePrefix="react-select"
                     options={groupByFieldOptions}
-                    value={groupByField ? rawDataFieldNameToOption(groupByField) : GROUP_BY_FIELD_DEFAULT_OPTION}
+                    value={
+                        groupByField
+                            ? rawDataFieldNameToOption(groupByField)
+                            : GROUP_BY_FIELD_DEFAULT_OPTION
+                    }
                     onChange={onChangeGroupByField}
                 />
             </div>
