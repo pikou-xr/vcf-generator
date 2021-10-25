@@ -1,5 +1,5 @@
 import { RootState } from '.'
-import { ContactsAndErrors, RawDatum } from '../types'
+import { ContactsAndErrors } from '../types'
 import { FormatError, formatPhoneNumber } from '../utils/formatting'
 import { NO_GROUPING_KEY } from '../utils/group-by-field'
 import { VcfContact, VCF_FIELD_NAMES } from '../utils/vcf'
